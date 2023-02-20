@@ -1,10 +1,20 @@
 import { Router, Request, Response, NextFunction } from "express";
 import asyncMiddleware from "../../middleware/async.middleware";
 import errorHandler from "../../expections/ErrorHandler";
-import { getStandingsValidation } from "../../validation/standings";
+import {
+  getRankedStandingsValidation,
+  getStandingsValidation,
+} from "../../validation/standings";
 import getStandingsController from "../../controllers/standings/getStandings.controller";
+import getRankedStandingsController from "../../controllers/standings/getRankedStandings.controller";
 
 const router: Router = Router();
+
+router.get(
+  "/ranked/:leagueId",
+  getRankedStandingsValidation(),
+  asyncMiddleware(getRankedStandingsController)
+);
 
 router.get(
   "/:leagueId/:teamId",

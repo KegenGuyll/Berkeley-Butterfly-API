@@ -64,3 +64,8 @@ export interface IGetStandingsQuery {
   include_stats?: boolean;
   include_team?: boolean;
 }
+
+export interface IGetRankedStandingsQuery {
+  include_team?: boolean;
+  sort_by?: string;
+}

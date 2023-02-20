@@ -2,9 +2,19 @@ import { Router, Request, Response, NextFunction } from "express";
 import asyncMiddleware from "../../middleware/async.middleware";
 import errorHandler from "../../expections/ErrorHandler";
 import getTeamController from "../../controllers/teams/getTeam.controller";
-import { getTeamValidation } from "../../validation/teams";
+import {
+  getTeamValidation,
+  getTeamsLastGameValidation,
+} from "../../validation/teams";
+import getTeamsLastGameController from "../../controllers/teams/getTeamsLastGame.controller";
 
 const router: Router = Router();
+
+router.get(
+  "/last-game/:leagueId/:teamId",
+  getTeamsLastGameValidation(),
+  asyncMiddleware(getTeamsLastGameController)
+);
 
 router.get(
   "/:leagueId/:teamId",

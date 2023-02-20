@@ -26,3 +26,8 @@ export interface IGetTeamQuery {
   include_standings?: boolean;
   include_stats?: boolean;
 }
+
+export interface IGetLastGameQuery {
+  include_player_stats?: boolean;
+  include_teams?: boolean;
+}
