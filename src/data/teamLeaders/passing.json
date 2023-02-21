@@ -1,0 +1,49 @@
+{
+    "_id": {
+      "rosterId": "$rosterId",
+      "teamId": "$teamId",
+      "seasonIndex": "$seasonIndex"
+    },
+    "passAtt": {
+      "$sum": "$passAtt"
+    },
+    "passComp": {
+      "$sum": "$passComp"
+    },
+    "passCompPct": {
+      "$avg": "$passCompPct"
+    },
+    "passInts": {
+      "$sum": "$passInts"
+    },
+    "passLongest": {
+      "$max": "$passLongest"
+    },
+    "passPts": {
+      "$sum": "$passPts"
+    },
+    "passerRating": {
+      "$avg": "$passerRating"
+    },
+    "passSacks": {
+      "$sum": "$passSacks"
+    },
+    "passTDs": {
+      "$sum": "$passTDs"
+    },
+    "passYds": {
+      "$sum": "$passYds"
+    },
+    "passYdsPerAtt": {
+      "$avg": "$passYdsPerAtt"
+    },
+    "passYdsPerGame": {
+      "$avg": "$passYdsPerGame"
+    },
+    "gamesPlayed": {
+      "$count": {}
+    },
+    "fullName": {
+      "$first": "$fullName"
+    }
+  }

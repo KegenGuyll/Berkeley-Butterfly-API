@@ -1,0 +1,40 @@
+{
+    "_id": {
+      "rosterId": "$rosterId",
+      "teamId": "$teamId",
+      "seasonIndex": "$seasonIndex"
+    },
+    "puntsBlocked": {
+      "$sum": "$puntsBlocked"
+    },
+    "puntsIn20": {
+      "$sum": "$puntsIn20"
+    },
+    "puntLongest": {
+      "$max": "$puntLongest"
+    },
+    "puntTBs": {
+      "$sum": "$puntTBs"
+    },
+    "puntNetYdsPerAtt": {
+      "$avg": "$puntNetYdsPerAtt"
+    },
+    "puntNetYds": {
+      "$sum": "$puntNetYds"
+    },
+    "puntAtt": {
+      "$sum": "$puntAtt"
+    },
+    "puntYdsPerAtt": {
+      "$avg": "$puntYdsPerAtt"
+    },
+    "puntYds": {
+      "$sum": "$puntYds"
+    },
+    "gamesPlayed": {
+      "$count": {}
+    },
+    "fullName": {
+      "$first": "$fullName"
+    }
+  }

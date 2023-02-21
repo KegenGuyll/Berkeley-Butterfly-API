@@ -11,8 +11,6 @@ const getTeamService = async (
 
   const pipeline: Document[] = [];
 
-  console.log(teamId);
-
   pipeline.push({
     $match: {
       teamId,

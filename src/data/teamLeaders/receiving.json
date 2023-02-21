@@ -1,0 +1,49 @@
+{
+    "_id": {
+      "rosterId": "$rosterId",
+      "teamId": "$teamId",
+      "seasonIndex": "$seasonIndex"
+    },
+    "recCatches": {
+      "$sum": "$recCatches"
+    },
+    "recCatchPct": {
+      "$avg": "$recCatchPct"
+    },
+    "recDrops": {
+      "$sum": "$recDrops"
+    },
+    "recLongest": {
+      "$max": "$recLongest"
+    },
+    "recPts": {
+      "$avg": "$recPts"
+    },
+    "recTDs": {
+      "$sum": "$recTDs"
+    },
+    "recToPct": {
+      "$avg": "$recToPct"
+    },
+    "recYdsAfterCatch": {
+      "$sum": "$recYdsAfterCatch"
+    },
+    "recYacPerCatch": {
+      "$avg": "$recYacPerCatch"
+    },
+    "recYds": {
+      "$sum": "$recYds"
+    },
+    "recYdsPerCatch": {
+      "$avg": "$recYdsPerCatch"
+    },
+    "recYdsPerGame": {
+      "$avg": "$recYdsPerGame"
+    },
+    "gamesPlayed": {
+      "$count": {}
+    },
+    "fullName": {
+      "$first": "$fullName"
+    }
+  }

@@ -8,6 +8,7 @@ import "express-async-errors";
 import playerRouter from "./routes/players";
 import standingsRouter from "./routes/standings";
 import teamRouter from "./routes/teams";
+import statsRouter from "./routes/stats";
 
 const shouldCompress = (req: any, res: any) => {
   if (req.headers["x-no-compression"]) {
@@ -54,6 +55,7 @@ class App {
     this.app.use("/player", playerRouter);
     this.app.use("/standings", standingsRouter);
     this.app.use("/team", teamRouter);
+    this.app.use("/stats", statsRouter);
   }
 }
 

@@ -1,0 +1,49 @@
+{
+  "_id": {
+    "rosterId": "$rosterId",
+    "teamId": "$teamId",
+    "seasonIndex": "$seasonIndex"
+  },
+  "rushAtt": {
+    "$sum": "$rushAtt"
+  },
+  "rushBrokenTackles": {
+    "$sum": "$rushBrokenTackles"
+  },
+  "rushFum": {
+    "$sum": "$rushFum"
+  },
+  "rushLongest": {
+    "$max": "$rushLongest"
+  },
+  "rushPts": {
+    "$avg": "$rushPts"
+  },
+  "rushTDs": {
+    "$sum": "$rushTDs"
+  },
+  "rushToPct": {
+    "$avg": "$rushToPct"
+  },
+  "rush20PlusYds": {
+    "$sum": "$rush20PlusYds"
+  },
+  "rushYdsAfterContact": {
+    "$sum": "$rushYdsAfterContact"
+  },
+  "rushYds": {
+    "$sum": "$rushYds"
+  },
+  "rushYdsPerAtt": {
+    "$avg": "$rushYdsPerAtt"
+  },
+  "rushYdsPerGame": {
+    "$avg": "$rushYdsPerGame"
+  },
+  "gamesPlayed": {
+    "$count": {}
+  },
+  "fullName": {
+    "$first": "$fullName"
+  }
+}

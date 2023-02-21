@@ -3,12 +3,20 @@ import asyncMiddleware from "../../middleware/async.middleware";
 import errorHandler from "../../expections/ErrorHandler";
 import getTeamController from "../../controllers/teams/getTeam.controller";
 import {
+  getTeamLeadersValidation,
   getTeamValidation,
   getTeamsLastGameValidation,
 } from "../../validation/teams";
 import getTeamsLastGameController from "../../controllers/teams/getTeamsLastGame.controller";
+import getTeamLeadersController from "../../controllers/teams/players/getTeamLeaders";
 
 const router: Router = Router();
+
+router.get(
+  "/leaders/:leagueId/:teamId/:dataType",
+  getTeamLeadersValidation(),
+  asyncMiddleware(getTeamLeadersController)
+);
 
 router.get(
   "/last-game/:leagueId/:teamId",

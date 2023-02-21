@@ -1,37 +1,5 @@
 import { param, query } from "express-validator";
-
-const rankList = [
-  "defTotalYdsRank.asc",
-  "defTotalYdsRank.desc",
-  "offTotalYdsRank.asc",
-  "offTotalYdsRank.desc",
-  "defPassYdsRank.asc",
-  "defPassYdsRank.desc",
-  "defRushYdsRank.asc",
-  "defRushYdsRank.desc",
-  "offPassYdsRank.asc",
-  "offPassYdsRank.desc",
-  "offRushYdsRank.asc",
-  "offRushYdsRank.desc",
-  "prevRank.asc",
-  "prevRank.desc",
-  "ptsAgainstRank.asc",
-  "ptsAgainstRank.desc",
-  "seed.asc",
-  "seed.desc",
-  "tODiff.asc",
-  "tODiff.desc",
-  "teamOvr.asc",
-  "teamOvr.desc",
-  "winPct.asc",
-  "winPct.desc",
-  "rank.asc",
-  "rank.desc",
-  "totalLosses.asc",
-  "totalLosses.desc",
-  "totalWins.asc",
-  "totalWins.desc",
-];
+import { rankList } from "../sortByLists";
 
 const getStandingsValidation = () => {
   return [

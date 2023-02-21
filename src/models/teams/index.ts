@@ -31,3 +31,18 @@ export interface IGetLastGameQuery {
   include_player_stats?: boolean;
   include_teams?: boolean;
 }
+
+export type DataType =
+  | "passing"
+  | "rushing"
+  | "kicking"
+  | "punting"
+  | "defense"
+  | "receiving";
+
+export interface IGetTeamLeaders {
+  include_teams?: boolean;
+  seasonIndex: number;
+  season_type?: "reg" | "pre";
+  sort_by?: string;
+}
