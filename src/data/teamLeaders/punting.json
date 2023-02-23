@@ -1,9 +1,4 @@
 {
-    "_id": {
-      "rosterId": "$rosterId",
-      "teamId": "$teamId",
-      "seasonIndex": "$seasonIndex"
-    },
     "puntsBlocked": {
       "$sum": "$puntsBlocked"
     },
@@ -36,5 +31,11 @@
     },
     "fullName": {
       "$first": "$fullName"
+    },
+    "dataType": {
+      "$first": "punting"
+    },
+    "scheduleId": {
+      "$first": "$scheduleId"
     }
   }

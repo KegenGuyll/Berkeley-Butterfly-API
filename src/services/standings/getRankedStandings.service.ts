@@ -63,6 +63,11 @@ const getRankedStandingsService = async (
         as: "team",
       },
     });
+    pipeline.push({
+      $unwind: {
+        path: "$team",
+      },
+    });
   }
 
   const result = await db.aggregate(pipeline).toArray();

@@ -5,8 +5,9 @@ import dataTypeGroup from "../../../utils/dataTypeGroup";
 import { AppError, HttpCode } from "../../../expections/AppError";
 import convertOrder from "../../../utils/convertSort";
 
-const getLeagueLeadersService = async (
+const getTeamPerGameStatsService = async (
   leagueId: number,
+  teamId: number,
   dataType: DataType,
   query: IGetTeamLeaders
 ) => {
@@ -17,10 +18,10 @@ const getLeagueLeadersService = async (
 
   pipeline.push({
     $match: {
+      teamId,
       dataType,
-      seasonIndex: query.seasonIndex,
+      seasonIndex: query.seasonIndex || 0,
       weekType: query.season_type || "reg",
-      weekIndex: { $lt: 18 },
     },
   });
 
@@ -29,7 +30,52 @@ const getLeagueLeadersService = async (
       $group: {
         ...dataTypeGroupData,
         _id: {
-          rosterId: "$rosterId",
+          teamId: "$teamId",
+          dataType: "$dataType",
+          seasonIndex: "$seasonIndex",
+          weekIndex: "$weekIndex",
+          weekType: "$seasonType",
+        },
+        weekIndex: { $first: "$weekIndex" },
+      },
+    });
+    pipeline.push({
+      $sort: {
+        weekIndex: 1,
+      },
+    });
+    pipeline.push({
+      $lookup: {
+        from: "schedules",
+        localField: "scheduleId",
+        foreignField: "scheduleId",
+        as: "game",
+      },
+    });
+    pipeline.push({
+      $unwind: {
+        path: "$game",
+      },
+    });
+    pipeline.push({
+      $addFields: {
+        isHomeTeam: {
+          $cond: {
+            if: {
+              $eq: ["$game.homeTeamId", "$_id.teamId"],
+            },
+            then: true,
+            else: false,
+          },
+        },
+        didHomeWin: {
+          $cond: {
+            if: {
+              $gte: ["$game.homeScore", "$game.awayScore"],
+            },
+            then: true,
+            else: false,
+          },
         },
       },
     });
@@ -49,29 +95,9 @@ const getLeagueLeadersService = async (
     });
   }
 
-  if (query.include_teams) {
-    pipeline.push({
-      $lookup: {
-        from: "teams",
-        localField: "_id.teamId",
-        foreignField: "teamId",
-        as: "team",
-      },
-    });
-    pipeline.push({
-      $unwind: {
-        path: "$team",
-      },
-    });
-  }
-
-  pipeline.push({
-    $limit: 10,
-  });
-
   const result = await db.aggregate(pipeline).toArray();
 
   return { success: true, body: result };
 };
 
-export default getLeagueLeadersService;
+export default getTeamPerGameStatsService;

@@ -32,9 +32,14 @@ const getTeamService = async (
     pipeline.push({
       $lookup: {
         from: "standings",
-        localField: "teamId",
-        foreignField: "teamId",
-        as: "standings",
+        pipeline: [
+          {
+            $match: { seasonIndex: query.seasonIndex },
+          },
+        ],
+        localField: "divName",
+        foreignField: "divisionName",
+        as: "confStandings",
       },
     });
   }

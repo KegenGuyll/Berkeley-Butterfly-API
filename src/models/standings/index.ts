@@ -65,6 +65,12 @@ export interface IGetStandingsQuery {
   include_team?: boolean;
 }
 
+export interface IGetLeagueStandingsQuery {
+  conferenceId?: number;
+  divisionId?: number;
+  include_team?: boolean;
+}
+
 export interface IGetRankedStandingsQuery {
   include_team?: boolean;
   sort_by?: string;

@@ -1,9 +1,4 @@
 {
-    "_id": {
-      "rosterId": "$rosterId",
-      "teamId": "$teamId",
-      "seasonIndex": "$seasonIndex"
-    },
     "defCatchAllowed": {
       "$sum": "$defCatchAllowed"
     },
@@ -42,5 +37,11 @@
     },
     "fullName": {
       "$first": "$fullName"
+    },
+    "dataType": {
+      "$first": "defense"
+    },
+    "scheduleId": {
+      "$first": "$scheduleId"
     }
   }

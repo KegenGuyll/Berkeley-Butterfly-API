@@ -25,6 +25,7 @@ export interface IGetTeamQuery {
   include_players?: boolean;
   include_standings?: boolean;
   include_stats?: boolean;
+  seasonIndex?: number;
 }
 
 export interface IGetLastGameQuery {
@@ -45,4 +46,15 @@ export interface IGetTeamLeaders {
   seasonIndex: number;
   season_type?: "reg" | "pre";
   sort_by?: string;
+}
+
+export interface IGetTeamSchedule {
+  include_team_stats?: boolean;
+  include_teams?: boolean;
+  season_type?: "reg" | "pre";
+}
+
+export interface IGetTeamStatsQuery {
+  seasonIndex: number;
+  season_type: "reg" | "pre";
 }

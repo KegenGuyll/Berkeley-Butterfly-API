@@ -1,9 +1,4 @@
 {
-    "_id": {
-      "rosterId": "$rosterId",
-      "teamId": "$teamId",
-      "seasonIndex": "$seasonIndex"
-    },
     "kickPts": {
       "$sum": "$kickPts"
     },
@@ -30,5 +25,11 @@
     },
     "fullName": {
       "$first": "$fullName"
+    },
+    "dataType": {
+      "$first": "kicking"
+    },
+    "scheduleId": {
+      "$first": "$scheduleId"
     }
   }

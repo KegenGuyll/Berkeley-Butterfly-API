@@ -21,15 +21,6 @@ export const receivingSortList = [
   "recYdsPerGame.desc",
 ];
 
-export const dataTypeList = [
-  "passing",
-  "rushing",
-  "defense",
-  "punting",
-  "kicking",
-  "receiving",
-];
-
 export const passingSortList = [
   "passAtt.asc",
   "passAtt.desc",
@@ -142,6 +133,15 @@ export const leadersSortList = [
   ...defenseSortList,
   ...kickingSortList,
   ...puntingSortList,
+];
+
+export const dataTypeList = [
+  "passing",
+  "rushing",
+  "defense",
+  "punting",
+  "kicking",
+  "receiving",
 ];
 
 export const rankList = [

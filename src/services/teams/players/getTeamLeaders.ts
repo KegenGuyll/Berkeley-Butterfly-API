@@ -28,6 +28,11 @@ const getTeamLeadersService = async (
     pipeline.push({
       $group: {
         ...dataTypeGroupData,
+        _id: {
+          rosterId: "$rosterId",
+          teamId: "$teamId",
+          seasonIndex: "$seasonIndex",
+        },
       },
     });
   } else {
@@ -45,6 +50,21 @@ const getTeamLeadersService = async (
       },
     });
   }
+
+  pipeline.push({
+    $lookup: {
+      from: "players",
+      localField: "_id.rosterId",
+      foreignField: "rosterId",
+      as: "playerInfo",
+    },
+  });
+
+  pipeline.push({
+    $unwind: {
+      path: "$playerInfo",
+    },
+  });
 
   if (query.include_teams) {
     pipeline.push({

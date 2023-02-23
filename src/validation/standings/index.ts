@@ -17,6 +17,27 @@ const getStandingsValidation = () => {
   ];
 };
 
+const getLeagueStandingsValidation = () => {
+  return [
+    param("leagueId").isNumeric().exists().toInt(),
+    query("include_team")
+      .isBoolean()
+      .withMessage("include_team must be a boolean.")
+      .toBoolean()
+      .optional(),
+    query("conferenceId")
+      .isNumeric()
+      .withMessage("conferenceId must be a number.")
+      .toInt()
+      .optional(),
+    query("divisionId")
+      .isNumeric()
+      .withMessage("divisionId must be a number.")
+      .toInt()
+      .optional(),
+  ];
+};
+
 const getRankedStandingsValidation = () => {
   return [
     param("leagueId")
@@ -43,5 +64,8 @@ const getRankedStandingsValidation = () => {
   ];
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { getStandingsValidation, getRankedStandingsValidation };
+export {
+  getStandingsValidation,
+  getRankedStandingsValidation,
+  getLeagueStandingsValidation,
+};

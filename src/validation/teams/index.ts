@@ -19,6 +19,21 @@ const getTeamValidation = () => {
       .isBoolean()
       .withMessage("include_stats must be a boolean.")
       .toBoolean()
+      .optional()
+      .custom((value: boolean, { req }) => {
+        if (value) {
+          if (req.query && req.query.seasonIndex) return true;
+
+          return false;
+        }
+
+        return true;
+      })
+      .withMessage("seasonIndex must be present in query"),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt()
       .optional(),
   ];
 };
@@ -36,6 +51,28 @@ const getTeamsLastGameValidation = () => {
       .isBoolean()
       .withMessage("include_teams must be a boolean.")
       .toBoolean()
+      .optional(),
+  ];
+};
+
+const getTeamsScheduleValidation = () => {
+  return [
+    param("leagueId").isNumeric().exists().toInt(),
+    param("teamId").isNumeric().exists().toInt(),
+    query("include_team_stats")
+      .isBoolean()
+      .withMessage("include_team_stats must be a boolean.")
+      .toBoolean()
+      .optional(),
+    query("include_teams")
+      .isBoolean()
+      .withMessage("include_teams must be a boolean.")
+      .toBoolean()
+      .optional(),
+    query("season_type")
+      .isString()
+      .isIn(["reg", "pre"])
+      .withMessage("season_type can only be reg or pre")
       .optional(),
   ];
 };
@@ -81,4 +118,5 @@ export {
   getTeamValidation,
   getTeamsLastGameValidation,
   getTeamLeadersValidation,
+  getTeamsScheduleValidation,
 };

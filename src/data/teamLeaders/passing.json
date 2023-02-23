@@ -1,9 +1,4 @@
 {
-    "_id": {
-      "rosterId": "$rosterId",
-      "teamId": "$teamId",
-      "seasonIndex": "$seasonIndex"
-    },
     "passAtt": {
       "$sum": "$passAtt"
     },
@@ -45,5 +40,11 @@
     },
     "fullName": {
       "$first": "$fullName"
+    },
+    "dataType": {
+      "$first": "passing"
+    },
+    "scheduleId": {
+      "$first": "$scheduleId"
     }
   }

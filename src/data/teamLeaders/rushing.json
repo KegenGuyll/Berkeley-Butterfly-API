@@ -1,9 +1,4 @@
 {
-  "_id": {
-    "rosterId": "$rosterId",
-    "teamId": "$teamId",
-    "seasonIndex": "$seasonIndex"
-  },
   "rushAtt": {
     "$sum": "$rushAtt"
   },
@@ -45,5 +40,11 @@
   },
   "fullName": {
     "$first": "$fullName"
+  },
+  "dataType": {
+    "$first": "rushing"
+  },
+  "scheduleId": {
+    "$first": "$scheduleId"
   }
 }

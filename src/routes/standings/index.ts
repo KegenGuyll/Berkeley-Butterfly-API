@@ -2,13 +2,21 @@ import { Router, Request, Response, NextFunction } from "express";
 import asyncMiddleware from "../../middleware/async.middleware";
 import errorHandler from "../../expections/ErrorHandler";
 import {
+  getLeagueStandingsValidation,
   getRankedStandingsValidation,
   getStandingsValidation,
 } from "../../validation/standings";
 import getStandingsController from "../../controllers/standings/getStandings.controller";
 import getRankedStandingsController from "../../controllers/standings/getRankedStandings.controller";
+import getLeagueStandingsController from "../../controllers/standings/getLeagueStandings.controller";
 
 const router: Router = Router();
+
+router.get(
+  "/league/:leagueId",
+  getLeagueStandingsValidation(),
+  asyncMiddleware(getLeagueStandingsController)
+);
 
 router.get(
   "/ranked/:leagueId",

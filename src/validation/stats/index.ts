@@ -37,5 +37,23 @@ const getLeagueLeadersValidation = () => {
   ];
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { getLeagueLeadersValidation };
+const getTeamStatsValidation = () => {
+  return [
+    param("leagueId").isNumeric().exists().toInt(),
+    param("teamId").isNumeric().exists().toInt(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt()
+      .exists()
+      .withMessage("seasonIndex is a required field."),
+    query("season_type")
+      .isString()
+      .withMessage("season_type must be a string.")
+      .isIn(["reg", "pre"])
+      .exists()
+      .withMessage("season_type is a required field."),
+  ];
+};
+
+export { getLeagueLeadersValidation, getTeamStatsValidation };

@@ -1,9 +1,4 @@
 {
-    "_id": {
-      "rosterId": "$rosterId",
-      "teamId": "$teamId",
-      "seasonIndex": "$seasonIndex"
-    },
     "recCatches": {
       "$sum": "$recCatches"
     },
@@ -45,5 +40,11 @@
     },
     "fullName": {
       "$first": "$fullName"
+    },
+    "dataType": {
+      "$first": "receiving"
+    },
+    "scheduleId": {
+      "$first": "$scheduleId"
     }
   }
