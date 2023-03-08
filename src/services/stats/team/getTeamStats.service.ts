@@ -7,7 +7,9 @@ const getTeamStatsService = async (
   teamId: number,
   query: IGetTeamStatsQuery
 ) => {
-  const db = mongoService.db(leagueId.toString()).collection("teamstats");
+  const db = mongoService
+    .db(leagueId.toString())
+    .collection(query.playerstats ? "playerstats" : "teamstats");
 
   const pipeline: Document[] = [];
 

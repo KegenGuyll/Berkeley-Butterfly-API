@@ -7,7 +7,7 @@ const getLeagueStandingsController = async (req: Request, res: Response) => {
 
     const standings = await getLeagueStandingsService(
       Number(leagueId),
-      req.query
+      req.query as any
     );
 
     res.send(standings);

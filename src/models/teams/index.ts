@@ -51,10 +51,12 @@ export interface IGetTeamLeaders {
 export interface IGetTeamSchedule {
   include_team_stats?: boolean;
   include_teams?: boolean;
+  seasonIndex: number;
   season_type?: "reg" | "pre";
 }
 
 export interface IGetTeamStatsQuery {
+  playerstats?: boolean;
   seasonIndex: number;
   season_type: "reg" | "pre";
 }

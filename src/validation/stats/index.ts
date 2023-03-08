@@ -53,6 +53,11 @@ const getTeamStatsValidation = () => {
       .isIn(["reg", "pre"])
       .exists()
       .withMessage("season_type is a required field."),
+    query("playerstats")
+      .isBoolean()
+      .withMessage("playerstats must be a boolean.")
+      .toBoolean()
+      .optional(),
   ];
 };
 

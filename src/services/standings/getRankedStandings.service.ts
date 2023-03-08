@@ -18,7 +18,7 @@ const getRankedStandingsService = async (
 
   pipeline.push({
     $match: {
-      calendarYear: currYear,
+      seasonIndex: query.seasonIndex,
       weekIndex: currWeek,
     },
   });

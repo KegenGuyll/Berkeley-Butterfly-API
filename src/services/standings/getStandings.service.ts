@@ -14,6 +14,7 @@ const getStandingsService = async (
   pipeline.push({
     $match: {
       teamId,
+      seasonIndex: query.seasonIndex,
     },
   });
 

@@ -63,15 +63,18 @@ export interface IStandingsResponse {
 export interface IGetStandingsQuery {
   include_stats?: boolean;
   include_team?: boolean;
+  seasonIndex: number;
 }
 
 export interface IGetLeagueStandingsQuery {
   conferenceId?: number;
   divisionId?: number;
   include_team?: boolean;
+  seasonIndex: number;
 }
 
 export interface IGetRankedStandingsQuery {
   include_team?: boolean;
+  seasonIndex: number;
   sort_by?: string;
 }

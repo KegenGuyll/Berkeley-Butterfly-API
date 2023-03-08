@@ -38,6 +38,10 @@ const getTeamValidation = () => {
   ];
 };
 
+const getTeamsValidation = () => {
+  return [param("leagueId").isNumeric().exists().toInt()];
+};
+
 const getTeamsLastGameValidation = () => {
   return [
     param("leagueId").isNumeric().exists().toInt(),
@@ -52,6 +56,10 @@ const getTeamsLastGameValidation = () => {
       .withMessage("include_teams must be a boolean.")
       .toBoolean()
       .optional(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt(),
   ];
 };
 
@@ -74,6 +82,10 @@ const getTeamsScheduleValidation = () => {
       .isIn(["reg", "pre"])
       .withMessage("season_type can only be reg or pre")
       .optional(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt(),
   ];
 };
 
@@ -119,4 +131,5 @@ export {
   getTeamsLastGameValidation,
   getTeamLeadersValidation,
   getTeamsScheduleValidation,
+  getTeamsValidation,
 };

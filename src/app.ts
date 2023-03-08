@@ -9,6 +9,7 @@ import playerRouter from "./routes/players";
 import standingsRouter from "./routes/standings";
 import teamRouter from "./routes/teams";
 import statsRouter from "./routes/stats";
+import scheduleRouter from "./routes/schedule";
 
 const shouldCompress = (req: any, res: any) => {
   if (req.headers["x-no-compression"]) {
@@ -56,6 +57,7 @@ class App {
     this.app.use("/standings", standingsRouter);
     this.app.use("/team", teamRouter);
     this.app.use("/stats", statsRouter);
+    this.app.use("/schedule", scheduleRouter);
   }
 }
 

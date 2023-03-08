@@ -8,7 +8,7 @@ const getTeamScheduleController = async (req: Request, res: Response) => {
     const player = await getTeamScheduleService(
       Number(leagueId),
       Number(teamId),
-      req.query
+      req.query as any
     );
 
     res.send(player);

@@ -7,11 +7,13 @@ import {
   getTeamValidation,
   getTeamsLastGameValidation,
   getTeamsScheduleValidation,
+  getTeamsValidation,
 } from "../../validation/teams";
 import getTeamsLastGameController from "../../controllers/teams/getTeamsLastGame.controller";
 import getTeamLeadersController from "../../controllers/teams/players/getTeamLeaders";
 import getTeamScheduleController from "../../controllers/teams/schedule/getTeamSchedule.controller";
 import getTeamPerGameStatsController from "../../controllers/stats/team/getTeamPerGameStatsService";
+import getTeamsController from "../../controllers/teams/getTeams.controller";
 
 const router: Router = Router();
 
@@ -43,6 +45,12 @@ router.get(
   "/:leagueId/:teamId",
   getTeamValidation(),
   asyncMiddleware(getTeamController)
+);
+
+router.get(
+  "/:leagueId/",
+  getTeamsValidation(),
+  asyncMiddleware(getTeamsController)
 );
 
 const teamRouter: Router = router;

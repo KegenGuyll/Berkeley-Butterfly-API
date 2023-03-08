@@ -14,6 +14,7 @@ const getLeagueStandingsService = async (
     pipeline.push({
       $match: {
         conferenceId: query.conferenceId,
+        seasonIndex: query.seasonIndex,
       },
     });
   } else if (query.divisionId) {

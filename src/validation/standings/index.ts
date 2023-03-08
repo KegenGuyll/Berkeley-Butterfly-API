@@ -14,6 +14,10 @@ const getStandingsValidation = () => {
       .withMessage("include_stats must be a boolean.")
       .toBoolean()
       .optional(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt(),
   ];
 };
 
@@ -35,6 +39,10 @@ const getLeagueStandingsValidation = () => {
       .withMessage("divisionId must be a number.")
       .toInt()
       .optional(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt(),
   ];
 };
 
@@ -61,6 +69,10 @@ const getRankedStandingsValidation = () => {
       .withMessage("include_team must be a boolean.")
       .toBoolean()
       .optional(),
+    query("seasonIndex")
+      .isNumeric()
+      .withMessage("seasonIndex must be a number.")
+      .toInt(),
   ];
 };
 

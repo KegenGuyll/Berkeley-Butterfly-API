@@ -16,6 +16,7 @@ const getTeamScheduleService = async (
       $or: [{ homeTeamId: teamId }, { awayTeamId: teamId }],
       weekType: query.season_type || "reg",
       weekIndex: { $lt: 20 },
+      seasonIndex: query.seasonIndex,
     },
   });
 
