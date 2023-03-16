@@ -4,18 +4,26 @@ import errorHandler from "../../expections/ErrorHandler";
 import getTeamController from "../../controllers/teams/getTeam.controller";
 import {
   getTeamLeadersValidation,
+  getTeamRosterValidation,
   getTeamValidation,
   getTeamsLastGameValidation,
   getTeamsScheduleValidation,
   getTeamsValidation,
 } from "../../validation/teams";
 import getTeamsLastGameController from "../../controllers/teams/getTeamsLastGame.controller";
-import getTeamLeadersController from "../../controllers/teams/players/getTeamLeaders";
+import getTeamLeadersController from "../../controllers/teams/players/getTeamLeaders.controller";
 import getTeamScheduleController from "../../controllers/teams/schedule/getTeamSchedule.controller";
 import getTeamPerGameStatsController from "../../controllers/stats/team/getTeamPerGameStatsService";
 import getTeamsController from "../../controllers/teams/getTeams.controller";
+import getTeamRosterController from "../../controllers/teams/players/getTeamRoster.controller";
 
 const router: Router = Router();
+
+router.get(
+  "/roster/:leagueId/:teamId",
+  getTeamRosterValidation(),
+  asyncMiddleware(getTeamRosterController)
+);
 
 router.get(
   "/leaders/:leagueId/:teamId/:dataType",

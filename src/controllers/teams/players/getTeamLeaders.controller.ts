@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import getTeamLeadersService from "../../../services/teams/players/getTeamLeaders";
+import getTeamLeadersService from "../../../services/teams/players/getTeamLeaders.service";
 import { DataType, IGetTeamLeaders } from "../../../models/teams";
 
 const getTeamLeadersController = async (req: Request, res: Response) => {

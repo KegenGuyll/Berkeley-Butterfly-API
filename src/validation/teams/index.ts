@@ -126,10 +126,18 @@ const getTeamLeadersValidation = () => {
   ];
 };
 
+const getTeamRosterValidation = () => {
+  return [
+    param("leagueId").isNumeric().exists().toInt(),
+    param("teamId").isNumeric().exists().toInt(),
+  ];
+};
+
 export {
   getTeamValidation,
   getTeamsLastGameValidation,
   getTeamLeadersValidation,
   getTeamsScheduleValidation,
   getTeamsValidation,
+  getTeamRosterValidation,
 };

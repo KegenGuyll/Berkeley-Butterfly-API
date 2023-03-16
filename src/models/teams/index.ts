@@ -48,6 +48,9 @@ export interface IGetTeamLeaders {
   sort_by?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IGetTeamRoster {}
+
 export interface IGetTeamSchedule {
   include_team_stats?: boolean;
   include_teams?: boolean;
