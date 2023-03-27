@@ -1,18 +1,16 @@
-import { Document } from "mongodb";
-import { mongoService } from "../../..";
+import { prisma } from "../../..";
 
 const getTeamRosterService = async (leagueId: number, teamId: number) => {
-  const db = mongoService.db(leagueId.toString()).collection("players");
-
-  const pipeline: Document[] = [];
-
-  pipeline.push({
-    $match: {
-      teamId,
+  const result = await prisma.players.findMany({
+    where: {
+      leagueId: {
+        equals: leagueId,
+      },
+      teamId: {
+        equals: teamId,
+      },
     },
   });
-
-  const result = await db.aggregate(pipeline).toArray();
 
   return { success: true, body: result };
 };

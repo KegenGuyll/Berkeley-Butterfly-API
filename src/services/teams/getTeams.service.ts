@@ -1,9 +1,11 @@
-import { mongoService } from "../..";
+import { prisma } from "../..";
 
 const getTeamsService = async (leagueId: number) => {
-  const db = mongoService.db(leagueId.toString()).collection("teams");
-
-  const result = await db.find({}).toArray();
+  const result = await prisma.teams.findMany({
+    where: {
+      leagueId,
+    },
+  });
 
   return { success: true, body: result };
 };

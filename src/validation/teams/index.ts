@@ -42,27 +42,6 @@ const getTeamsValidation = () => {
   return [param("leagueId").isNumeric().exists().toInt()];
 };
 
-const getTeamsLastGameValidation = () => {
-  return [
-    param("leagueId").isNumeric().exists().toInt(),
-    param("teamId").isNumeric().exists().toInt(),
-    query("include_player_stats")
-      .isBoolean()
-      .withMessage("include_player_stats must be a boolean.")
-      .toBoolean()
-      .optional(),
-    query("include_teams")
-      .isBoolean()
-      .withMessage("include_teams must be a boolean.")
-      .toBoolean()
-      .optional(),
-    query("seasonIndex")
-      .isNumeric()
-      .withMessage("seasonIndex must be a number.")
-      .toInt(),
-  ];
-};
-
 const getTeamsScheduleValidation = () => {
   return [
     param("leagueId").isNumeric().exists().toInt(),
@@ -135,7 +114,6 @@ const getTeamRosterValidation = () => {
 
 export {
   getTeamValidation,
-  getTeamsLastGameValidation,
   getTeamLeadersValidation,
   getTeamsScheduleValidation,
   getTeamsValidation,

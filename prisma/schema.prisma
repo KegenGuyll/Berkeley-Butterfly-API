@@ -1,0 +1,571 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type PlayersSignatureSlotList {
+  isEmpty          Boolean
+  locked           Boolean
+  ovrThreshold     Int
+  signatureAbility PlayersSignatureSlotListSignatureAbility
+}
+
+type PlayersSignatureSlotListSignatureAbility {
+  abilityGUID                      String
+  activationEnabled                Boolean
+  activationId                     String
+  deactivationEnabled              Boolean
+  deactivationId                   String
+  isPassive                        Boolean
+  isUnlocked                       Boolean
+  marketplaceAbilityAlias          String
+  signatureActivationDescription   String
+  signatureDeactivationDescription String
+  signatureDescription             String
+  signatureLogoId                  Int
+  signatureTitle                   String
+  startActivated                   Boolean
+  unlockRequirement                String
+}
+
+model leagues {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model players {
+  id                       String                     @id @default(auto()) @map("_id") @db.ObjectId
+  accelRating              Int
+  age                      Int
+  agilityRating            Int
+  awareRating              Int
+  bCVRating                Int
+  bigHitTrait              Int
+  birthDay                 Int
+  birthMonth               Int
+  birthYear                Int
+  blockShedRating          Int
+  breakSackRating          Int
+  breakTackleRating        Int
+  cITRating                Int
+  capHit                   Int
+  capReleaseNetSavings     Int
+  capReleasePenalty        Int
+  carryRating              Int
+  catchRating              Int
+  changeOfDirectionRating  Int
+  clutchTrait              Int
+  college                  String
+  confRating               Int
+  contractBonus            Int
+  contractLength           Int
+  contractSalary           Int
+  contractYearsLeft        Int
+  coverBallTrait           Int
+  dLBullRushTrait          Int
+  dLSpinTrait              Int
+  dLSwimTrait              Int
+  desiredBonus             Int
+  desiredLength            Int
+  desiredSalary            Int
+  devTrait                 Int
+  draftPick                Int
+  draftRound               Int
+  dropOpenPassTrait        Int
+  durabilityGrade          Int
+  experiencePoints         Int
+  feetInBoundsTrait        Int
+  fightForYardsTrait       Int
+  finesseMovesRating       Int
+  firstName                String
+  forcePassTrait           Int
+  hPCatchTrait             Int
+  height                   Int
+  highMotorTrait           Int
+  hitPowerRating           Int
+  homeState                Int
+  homeTown                 String
+  impactBlockRating        Int
+  injuryLength             Int
+  injuryRating             Int
+  injuryType               Int
+  intangibleGrade          Int
+  isActive                 Boolean
+  isFreeAgent              Boolean
+  isOnIR                   Boolean
+  isOnPracticeSquad        Boolean
+  jerseyNum                Int
+  jukeMoveRating           Int
+  jumpRating               Int
+  kickAccRating            Int
+  kickPowerRating          Int
+  kickRetRating            Int
+  lBStyleTrait             Int
+  lastName                 String
+  leadBlockRating          Int
+  leagueId                 Int
+  legacyScore              Int
+  manCoverRating           Int
+  passBlockFinesseRating   Int
+  passBlockPowerRating     Int
+  passBlockRating          Int
+  penaltyTrait             Int
+  physicalGrade            Int
+  playActionRating         Int
+  playBallTrait            Int
+  playRecRating            Int
+  playerBestOvr            Int
+  playerSchemeOvr          Int
+  portraitId               Int
+  posCatchTrait            Int
+  position                 Position
+  powerMovesRating         Int
+  predictTrait             Int
+  presentationId           Int
+  pressRating              Int
+  productionGrade          Int
+  pursuitRating            Int
+  qBStyleTrait             Int
+  reSignStatus             Int
+  releaseRating            Int
+  rookieYear               Int
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  rosterGoalList           Json?
+  rosterId                 Int
+  routeRunDeepRating       Int
+  routeRunMedRating        Int
+  routeRunShortRating      Int
+  runBlockFinesseRating    Int
+  runBlockPowerRating      Int
+  runBlockRating           Int
+  runStyle                 Int
+  scheme                   Int
+  sensePressureTrait       Int
+  signatureSlotList        PlayersSignatureSlotList[]
+  sizeGrade                Int
+  skillPoints              Int
+  specCatchRating          Int
+  speedRating              Int
+  spinMoveRating           Int
+  staminaRating            Int
+  stiffArmRating           Int
+  strengthRating           Int
+  stripBallTrait           Int
+  tackleRating             Int
+  teamId                   Int
+  teamSchemeOvr            Int
+  throwAccDeepRating       Int
+  throwAccMidRating        Int
+  throwAccRating           Int
+  throwAccShortRating      Int
+  throwAwayTrait           Int
+  throwOnRunRating         Int
+  throwPowerRating         Int
+  throwUnderPressureRating Int
+  tightSpiralTrait         Int
+  toughRating              Int
+  truckRating              Int
+  weight                   Int
+  yACCatchTrait            Int
+  yearsPro                 Int
+  zoneCoverRating          Int
+  team                     teams                      @relation(fields: [leagueId, teamId], references: [leagueId, teamId])
+  passingStats             statsPassing[]
+  rushingStats             statsRushing[]
+  receivingStats           statsReceiving[]
+  defenseStats             statsDefense[]
+  kickingStats             statsKicking[]
+  puntingStats             statsPunting[]
+
+  @@unique([rosterId, leagueId])
+}
+
+model schedules {
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  awayScore       Int
+  awayTeamId      Int
+  homeScore       Int
+  homeTeamId      Int
+  isGameOfTheWeek Boolean
+  lastUpdated     DateTime    @db.Date
+  leagueId        Int
+  scheduleId      Int
+  seasonIndex     Int
+  stageIndex      Int
+  status          Int
+  weekIndex       Int
+  weekNumber      Int
+  weekType        String
+  homeTeam        teams?      @relation(fields: [homeTeamId, leagueId], references: [teamId, leagueId])
+  teamstats       teamstats[]
+
+  @@unique([scheduleId, leagueId])
+}
+
+model standings {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  awayLosses      Int
+  awayTies        Int
+  awayWins        Int
+  calendarYear    Int
+  capAvailable    Int
+  capRoom         Int
+  capSpent        Int
+  confLosses      Int
+  confTies        Int
+  confWins        Int
+  conferenceId    Int
+  conferenceName  String
+  defPassYds      Int
+  defPassYdsRank  Int
+  defRushYds      Int
+  defRushYdsRank  Int
+  defTotalYds     Int
+  defTotalYdsRank Int
+  divLosses       Int
+  divTies         Int
+  divWins         Int
+  divisionId      Int
+  divisionName    String
+  homeLosses      Int
+  homeTies        Int
+  homeWins        Int
+  lastUpdated     DateTime @db.Date
+  leagueId        Int
+  netPts          Int
+  offPassYds      Int
+  offPassYdsRank  Int
+  offRushYds      Int
+  offRushYdsRank  Int
+  offTotalYds     Int
+  offTotalYdsRank Int
+  playoffStatus   Int
+  prevRank        Int
+  ptsAgainst      Int
+  ptsAgainstRank  Int
+  ptsFor          Int
+  ptsForRank      Int
+  rank            Int
+  seasonIndex     Int
+  seed            Int
+  stageIndex      Int
+  tODiff          Int
+  teamId          Int
+  teamName        String
+  teamOvr         Int
+  totalLosses     Int
+  totalTies       Int
+  totalWins       Int
+  weekIndex       Int
+  winLossStreak   Int
+  /// Multiple data types found: Float: 93.8%, Int: 6.3% out of 64 sampled entries
+  winPct          Int
+  teams           teams?   @relation(fields: [teamId, leagueId], references: [teamId, leagueId])
+
+  @@unique([teamId, leagueId])
+}
+
+model statsDefense {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  defCatchAllowed Int
+  defDeflections  Int
+  defForcedFum    Int
+  defFumRec       Int
+  defIntReturnYds Int
+  defInts         Int
+  defPts          Int
+  /// Multiple data types found: Float: 4.3%, Int: 95.7% out of 1000 sampled entries
+  defSacks        Json
+  defSafeties     Int
+  defTDs          Int
+  defTotalTackles Int
+  fullName        String
+  lastUpdated     DateTime @db.Date
+  leagueId        Int
+  rosterId        Int
+  scheduleId      Int
+  seasonIndex     Int
+  stageIndex      Int
+  statId          Int
+  teamId          Int
+  weekIndex       Int
+  weekNumber      Int
+  weekType        String
+  players         players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model statsKicking {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  fG50PlusAtt  Int
+  fG50PlusMade Int
+  fGAtt        Int
+  /// Multiple data types found: Float: 1.6%, Int: 98.4% out of 952 sampled entries
+  fGCompPct    Json
+  fGLongest    Int
+  fGMade       Int
+  fullName     String
+  kickPts      Int
+  kickoffAtt   Int
+  kickoffTBs   Int
+  lastUpdated  DateTime @db.Date
+  leagueId     Int
+  rosterId     Int
+  scheduleId   Int
+  seasonIndex  Int
+  stageIndex   Int
+  statId       Int
+  teamId       Int
+  weekIndex    Int
+  weekNumber   Int
+  weekType     String
+  xPAtt        Int
+  /// Multiple data types found: Float: 1.1%, Int: 98.9% out of 952 sampled entries
+  xPCompPct    Json
+  xPMade       Int
+  players      players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model statsPassing {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName       String
+  lastUpdated    DateTime @db.Date
+  leagueId       Int
+  passAtt        Int
+  passComp       Int
+  /// Multiple data types found: Float: 78.9%, Int: 21.1% out of 749 sampled entries
+  passCompPct    Json
+  passInts       Int
+  passLongest    Int
+  passPts        Int
+  passSacks      Int
+  passTDs        Int
+  passYds        Int
+  /// Multiple data types found: Float: 86.8%, Int: 13.2% out of 749 sampled entries
+  passYdsPerAtt  Json
+  /// Multiple data types found: Float: 91.3%, Int: 8.7% out of 749 sampled entries
+  passYdsPerGame Json
+  /// Multiple data types found: Float: 87%, Int: 13% out of 749 sampled entries
+  passerRating   Json
+  rosterId       Int
+  scheduleId     Int
+  seasonIndex    Int
+  stageIndex     Int
+  statId         Int
+  teamId         Int
+  weekIndex      Int
+  weekNumber     Int
+  weekType       String
+  players        players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model statsPunting {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName         String
+  lastUpdated      DateTime @db.Date
+  leagueId         Int
+  puntAtt          Int
+  puntLongest      Int
+  puntNetYds       Int
+  /// Multiple data types found: Float: 58.4%, Int: 41.6% out of 628 sampled entries
+  puntNetYdsPerAtt Json
+  puntTBs          Int
+  puntYds          Int
+  /// Multiple data types found: Float: 60.5%, Int: 39.5% out of 628 sampled entries
+  puntYdsPerAtt    Json
+  puntsBlocked     Int
+  puntsIn20        Int
+  rosterId         Int
+  scheduleId       Int
+  seasonIndex      Int
+  stageIndex       Int
+  statId           Int
+  teamId           Int
+  weekIndex        Int
+  weekNumber       Int
+  weekType         String
+  players          players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model statsReceiving {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName         String
+  lastUpdated      DateTime @db.Date
+  leagueId         Int
+  /// Multiple data types found: Float: 3.4%, Int: 96.6% out of 1000 sampled entries
+  recCatchPct      Json
+  recCatches       Int
+  recDrops         Int
+  recLongest       Int
+  recPts           Int
+  recTDs           Int
+  recToPct         Int
+  /// Multiple data types found: Float: 53.4%, Int: 46.6% out of 1000 sampled entries
+  recYacPerCatch   Json
+  recYds           Int
+  recYdsAfterCatch Int
+  /// Multiple data types found: Float: 51.7%, Int: 48.3% out of 1000 sampled entries
+  recYdsPerCatch   Json
+  /// Multiple data types found: Float: 87.3%, Int: 12.7% out of 1000 sampled entries
+  recYdsPerGame    Json
+  rosterId         Int
+  scheduleId       Int
+  seasonIndex      Int
+  stageIndex       Int
+  statId           Int
+  teamId           Int
+  weekIndex        Int
+  weekNumber       Int
+  weekType         String
+  players          players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model statsRushing {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName            String
+  lastUpdated         DateTime @db.Date
+  leagueId            Int
+  rosterId            Int
+  rush20PlusYds       Int
+  rushAtt             Int
+  rushBrokenTackles   Int
+  rushFum             Int
+  rushLongest         Int
+  rushPts             Int
+  rushTDs             Int
+  rushToPct           Int
+  rushYds             Int
+  rushYdsAfterContact Int
+  /// Multiple data types found: Float: 55.7%, Int: 44.3% out of 1000 sampled entries
+  rushYdsPerAtt       Json
+  /// Multiple data types found: Float: 87.3%, Int: 12.7% out of 1000 sampled entries
+  rushYdsPerGame      Json
+  scheduleId          Int
+  seasonIndex         Int
+  stageIndex          Int
+  statId              Int
+  teamId              Int
+  weekIndex           Int
+  weekNumber          Int
+  weekType            String
+  players             players? @relation(fields: [rosterId, leagueId], references: [rosterId, leagueId])
+}
+
+model teams {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  abbrName       String
+  cityName       String
+  defScheme      Int
+  displayName    String
+  divName        String
+  injuryCount    Int
+  lastUpdated    DateTime    @db.Date
+  leagueId       Int
+  logoId         Int
+  nickName       String
+  offScheme      Int
+  ovrRating      Int
+  primaryColor   Int
+  secondaryColor Int
+  teamId         Int
+  userName       String
+  players        players[]
+  teamStats      teamstats[]
+  schedule       schedules[]
+  standings      standings[]
+
+  @@unique([leagueId, teamId])
+}
+
+model teamstats {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  defForcedFum      Int
+  defFumRec         Int
+  defIntsRec        Int
+  defPassYds        Int
+  /// Multiple data types found: Float: 90.9%, Int: 9.1% out of 858 sampled entries
+  defPtsPerGame     Json
+  defRedZoneFGs     Int
+  /// Multiple data types found: Float: 21.4%, Int: 78.6% out of 858 sampled entries
+  defRedZonePct     Json
+  defRedZoneTDs     Int
+  defRedZones       Int
+  defRushYds        Int
+  defSacks          Int
+  defTotalYds       Int
+  lastUpdated       DateTime  @db.Date
+  leagueId          Int
+  off1stDowns       Int
+  off2PtAtt         Int
+  off2PtConv        Int
+  off2PtConvPct     Int
+  off3rdDownAtt     Int
+  off3rdDownConv    Int
+  /// Multiple data types found: Float: 72.6%, Int: 27.4% out of 858 sampled entries
+  off3rdDownConvPct Json
+  off4thDownAtt     Int
+  off4thDownConv    Int
+  /// Multiple data types found: Float: 11.2%, Int: 88.8% out of 858 sampled entries
+  off4thDownConvPct Json
+  offFumLost        Int
+  offIntsLost       Int
+  offPassTDs        Int
+  offPassYds        Int
+  /// Multiple data types found: Float: 88.3%, Int: 11.7% out of 858 sampled entries
+  offPtsPerGame     Json
+  offRedZoneFGs     Int
+  /// Multiple data types found: Float: 21.4%, Int: 78.6% out of 858 sampled entries
+  offRedZonePct     Json
+  offRedZoneTDs     Int
+  offRedZones       Int
+  offRushTDs        Int
+  offRushYds        Int
+  offSacks          Int
+  offTotalYds       Int
+  offTotalYdsGained Int
+  penalties         Int
+  penaltyYds        Int
+  scheduleId        Int
+  seasonIndex       Int
+  seed              Int
+  stageIndex        Int
+  statId            Int
+  tODiff            Int
+  tOGiveaways       Int
+  tOTakeaways       Int
+  teamId            Int
+  totalLosses       Int
+  totalTies         Int
+  totalWins         Int
+  weekIndex         Int
+  weekNumber        Int
+  weekType          String
+  teams             teams?    @relation(fields: [teamId, leagueId], references: [teamId, leagueId])
+  game              schedules @relation(fields: [scheduleId, leagueId], references: [scheduleId, leagueId])
+}
+
+enum Position {
+  QB
+  HB
+  FB
+  WR
+  TE
+  LT
+  LG
+  C
+  RG
+  RT
+  LE
+  RE
+  DT
+  LOLB
+  MLB
+  ROLB
+  CB
+  FS
+  SS
+  K
+  P
+}

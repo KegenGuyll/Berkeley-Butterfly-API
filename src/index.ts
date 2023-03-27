@@ -1,4 +1,6 @@
 import { MongoClient } from "mongodb";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { PrismaClient } from "@prisma/client";
 
 // eslint-disable-next-line import/no-unresolved
 import { initializeApp, cert } from "firebase-admin/app";
@@ -23,6 +25,11 @@ export const firebaseApp = initializeApp({
 });
 
 export const mongoService = new MongoClient(uri);
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+export const prisma = globalForPrisma.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 const connectMongoDb = () => {
   mongoService
@@ -35,7 +42,25 @@ const connectMongoDb = () => {
     });
 };
 
-connectMongoDb();
+// connectMongoDb();
+
+async function main() {
+  // Connect the client
+
+  await connectMongoDb();
+  await prisma.$connect();
+  // ... you will write your Prisma Client queries here
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
 
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);

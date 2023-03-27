@@ -6,11 +6,9 @@ import {
   getTeamLeadersValidation,
   getTeamRosterValidation,
   getTeamValidation,
-  getTeamsLastGameValidation,
   getTeamsScheduleValidation,
   getTeamsValidation,
 } from "../../validation/teams";
-import getTeamsLastGameController from "../../controllers/teams/getTeamsLastGame.controller";
 import getTeamLeadersController from "../../controllers/teams/players/getTeamLeaders.controller";
 import getTeamScheduleController from "../../controllers/teams/schedule/getTeamSchedule.controller";
 import getTeamPerGameStatsController from "../../controllers/stats/team/getTeamPerGameStatsService";
@@ -41,12 +39,6 @@ router.get(
   "/schedule/:leagueId/:teamId",
   getTeamsScheduleValidation(),
   asyncMiddleware(getTeamScheduleController)
-);
-
-router.get(
-  "/last-game/:leagueId/:teamId",
-  getTeamsLastGameValidation(),
-  asyncMiddleware(getTeamsLastGameController)
 );
 
 router.get(
