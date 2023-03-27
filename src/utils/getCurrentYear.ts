@@ -11,6 +11,11 @@ const getCurrentYear = async (leagueId: number): Promise<number> => {
 
   const pipeline: Document[] = [
     {
+      $match: {
+        leagueId,
+      },
+    },
+    {
       $sort: {
         calendarYear: -1,
       },

@@ -9,6 +9,11 @@ const getAvailableSeasonsService = async (
   const results = await db
     .aggregate([
       {
+        $match: {
+          leagueId,
+        },
+      },
+      {
         $group: {
           _id: {
             seasonIndex: "$seasonIndex",

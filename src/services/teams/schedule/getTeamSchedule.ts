@@ -17,6 +17,7 @@ const getTeamScheduleService = async (
       weekType: query.season_type || "reg",
       weekIndex: { $lt: 20 },
       seasonIndex: query.seasonIndex,
+      leagueId,
     },
   });
 

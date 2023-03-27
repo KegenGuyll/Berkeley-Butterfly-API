@@ -14,6 +14,7 @@ const getPlayerService = async (
   pipeline.push({
     $match: {
       rosterId,
+      leagueId,
     },
   });
 

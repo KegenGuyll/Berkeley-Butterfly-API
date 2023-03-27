@@ -21,6 +21,7 @@ const getTeamLeadersService = async (
       teamId,
       dataType,
       seasonIndex: query.seasonIndex,
+      leagueId,
     },
   });
 

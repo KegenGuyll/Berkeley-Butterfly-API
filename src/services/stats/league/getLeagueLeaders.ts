@@ -21,6 +21,7 @@ const getLeagueLeadersService = async (
       seasonIndex: query.seasonIndex,
       weekType: query.season_type || "reg",
       weekIndex: { $lt: 18 },
+      leagueId,
     },
   });
 

@@ -16,6 +16,7 @@ const getCurrentWeek = async (
     {
       $match: {
         calendarYear: currYear,
+        leagueId,
       },
     },
     {

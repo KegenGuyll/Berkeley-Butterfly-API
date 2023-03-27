@@ -15,6 +15,7 @@ const getLeagueStandingsService = async (
       $match: {
         conferenceId: query.conferenceId,
         seasonIndex: query.seasonIndex,
+        leagueId,
       },
     });
   } else if (query.divisionId) {

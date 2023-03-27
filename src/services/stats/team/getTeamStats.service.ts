@@ -18,6 +18,7 @@ const getTeamStatsService = async (
       teamId,
       weekType: query.season_type,
       seasonIndex: query.seasonIndex,
+      leagueId,
     },
   });
 

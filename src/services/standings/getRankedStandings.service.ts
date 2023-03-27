@@ -20,6 +20,7 @@ const getRankedStandingsService = async (
     $match: {
       seasonIndex: query.seasonIndex,
       weekIndex: currWeek,
+      leagueId,
     },
   });
 

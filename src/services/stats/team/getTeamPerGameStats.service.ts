@@ -22,6 +22,7 @@ const getTeamPerGameStatsService = async (
       dataType,
       seasonIndex: query.seasonIndex || 0,
       weekType: query.season_type || "reg",
+      leagueId,
     },
   });
 

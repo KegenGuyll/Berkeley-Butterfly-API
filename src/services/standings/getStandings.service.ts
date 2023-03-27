@@ -15,6 +15,7 @@ const getStandingsService = async (
     $match: {
       teamId,
       seasonIndex: query.seasonIndex,
+      leagueId,
     },
   });
 
