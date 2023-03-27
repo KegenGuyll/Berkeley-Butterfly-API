@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { mongoService } from "../../..";
+import { mongoService, dbName } from "../../..";
 import { IGetTeamStatsQuery } from "../../../models/teams";
 
 const getTeamStatsService = async (
@@ -8,7 +8,7 @@ const getTeamStatsService = async (
   query: IGetTeamStatsQuery
 ) => {
   const db = mongoService
-    .db(leagueId.toString())
+    .db(dbName)
     .collection(query.playerstats ? "playerstats" : "teamstats");
 
   const pipeline: Document[] = [];

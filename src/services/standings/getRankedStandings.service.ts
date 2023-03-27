@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { mongoService } from "../..";
+import { mongoService, dbName } from "../..";
 import { IGetRankedStandingsQuery } from "../../models/standings";
 import getCurrentYear from "../../utils/getCurrentYear";
 import getCurrentWeek from "../../utils/getCurrentWeek";
@@ -9,7 +9,7 @@ const getRankedStandingsService = async (
   leagueId: number,
   query: IGetRankedStandingsQuery
 ) => {
-  const db = mongoService.db(leagueId.toString()).collection("standings");
+  const db = mongoService.db(dbName).collection("standings");
 
   const currYear = await getCurrentYear(leagueId);
   const currWeek = await getCurrentWeek(leagueId, currYear);

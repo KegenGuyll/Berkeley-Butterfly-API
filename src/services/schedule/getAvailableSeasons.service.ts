@@ -1,10 +1,10 @@
-import { mongoService } from "../..";
+import { dbName, mongoService } from "../..";
 
 const getAvailableSeasonsService = async (
   leagueId: number,
   baseYear?: number
 ) => {
-  const db = mongoService.db(leagueId.toString()).collection("schedules");
+  const db = mongoService.db(dbName).collection("schedules");
 
   const results = await db
     .aggregate([

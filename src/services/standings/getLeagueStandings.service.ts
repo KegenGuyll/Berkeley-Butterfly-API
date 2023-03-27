@@ -1,12 +1,12 @@
 import { Document } from "mongodb";
-import { mongoService } from "../..";
+import { mongoService, dbName } from "../..";
 import { IGetLeagueStandingsQuery } from "../../models/standings";
 
 const getLeagueStandingsService = async (
   leagueId: number,
   query: IGetLeagueStandingsQuery
 ) => {
-  const db = mongoService.db(leagueId.toString()).collection("standings");
+  const db = mongoService.db(dbName).collection("standings");
 
   const pipeline: Document[] = [];
 

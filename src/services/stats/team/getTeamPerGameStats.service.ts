@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { mongoService } from "../../..";
+import { mongoService, dbName } from "../../..";
 import { DataType, IGetTeamLeaders } from "../../../models/teams";
 import dataTypeGroup from "../../../utils/dataTypeGroup";
 import { AppError, HttpCode } from "../../../expections/AppError";
@@ -11,7 +11,7 @@ const getTeamPerGameStatsService = async (
   dataType: DataType,
   query: IGetTeamLeaders
 ) => {
-  const db = mongoService.db(leagueId.toString()).collection("playerstats");
+  const db = mongoService.db(dbName).collection("playerstats");
 
   const pipeline: Document[] = [];
   const dataTypeGroupData = dataTypeGroup(dataType);

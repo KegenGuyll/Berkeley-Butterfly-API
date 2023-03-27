@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { mongoService } from "..";
+import { mongoService, dbName } from "..";
 
 interface CurrentYear {
   _id: string;
@@ -7,7 +7,7 @@ interface CurrentYear {
 }
 
 const getCurrentYear = async (leagueId: number): Promise<number> => {
-  const db = mongoService.db(leagueId.toString()).collection("standings");
+  const db = mongoService.db(dbName).collection("standings");
 
   const pipeline: Document[] = [
     {
