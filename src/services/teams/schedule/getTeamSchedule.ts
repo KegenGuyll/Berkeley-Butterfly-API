@@ -26,6 +26,13 @@ const getTeamScheduleService = async (
       $lookup: {
         from: "teams",
         localField: "homeTeamId",
+        pipeline: [
+          {
+            $match: {
+              leagueId,
+            },
+          },
+        ],
         foreignField: "teamId",
         as: "homeTeam",
       },
@@ -34,6 +41,13 @@ const getTeamScheduleService = async (
       $lookup: {
         from: "teams",
         localField: "awayTeamId",
+        pipeline: [
+          {
+            $match: {
+              leagueId,
+            },
+          },
+        ],
         foreignField: "teamId",
         as: "awayTeam",
       },

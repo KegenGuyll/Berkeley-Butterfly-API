@@ -59,7 +59,6 @@ export interface IGetTeamSchedule {
 }
 
 export interface IGetTeamStatsQuery {
-  playerstats?: boolean;
   seasonIndex: number;
   season_type: "reg" | "pre";
 }
