@@ -6,6 +6,8 @@ const getAvailableSeasonsService = async (
 ) => {
   const db = mongoService.db(dbName).collection("schedules");
 
+  console.log(dbName);
+
   const results = await db
     .aggregate([
       {
@@ -33,6 +35,8 @@ const getAvailableSeasonsService = async (
       },
     ])
     .toArray();
+
+  console.log(results, "results!!!!!!!!!");
 
   return { success: true, body: results };
 };
