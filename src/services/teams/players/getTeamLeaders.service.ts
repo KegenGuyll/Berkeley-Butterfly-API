@@ -56,6 +56,13 @@ const getTeamLeadersService = async (
     $lookup: {
       from: "players",
       localField: "_id.rosterId",
+      pipeline: [
+        {
+          $match: {
+            leagueId,
+          },
+        },
+      ],
       foreignField: "rosterId",
       as: "playerInfo",
     },
@@ -72,6 +79,13 @@ const getTeamLeadersService = async (
       $lookup: {
         from: "teams",
         localField: "_id.teamId",
+        pipeline: [
+          {
+            $match: {
+              leagueId,
+            },
+          },
+        ],
         foreignField: "teamId",
         as: "team",
       },
